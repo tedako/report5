@@ -24,7 +24,7 @@ public class Enemy extends LivingThing{
 
     @Override
     public void attack(LivingThing opponent) {
-        
+
         int damage = (int) (Math.random() * getAttack());
         int kakusin = (int) (Math.random() * 10 + 1);
         if (!isDead()) {
