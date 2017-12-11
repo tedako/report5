@@ -19,13 +19,28 @@ public class Enemy extends LivingThing{
      */
     public Enemy (String name, int maximumHP, int attack) {
         super(name,maximumHP,attack);
-        this.setName(name);
-        setHitPoint(maximumHP);
-        this.setAttack(attack);
-        setDead(false);
+
     }
 
+    @Override
+    public void attack(LivingThing opponent) {
+        
+        int damage = (int) (Math.random() * getAttack());
+        int kakusin = (int) (Math.random() * 10 + 1);
+        if (!isDead()) {
 
+            if (kakusin <= 3) {
+                System.out.printf("%sの攻撃！痛恨の一撃！！%Sに%dのダメージを与えた！！\n", getName(), opponent.getName(), damage * 2);
+                opponent.wounded(damage * 2);
+            } else if (damage == 0) {
+                System.out.printf("%sの攻撃！,,,だが、%sは攻撃を回避した！\n", getName(), opponent.getName());
+            } else {
+                System.out.printf("%sの攻撃！%sに%dのダメージを与えた！！\n", getName(), opponent.getName(), damage);
+                opponent.wounded(damage);
+            }
+
+        }
+    }
 
     /**
      * 自身へ攻撃されたときのダメージ処理をするメソッド。

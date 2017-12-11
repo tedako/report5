@@ -22,6 +22,26 @@ public class Hero extends LivingThing{
 
     }
 
+    @Override
+    public void attack(LivingThing opponent) {
+
+        int damege = (int) (Math.random() * getAttack());
+        int kakusin = (int) (Math.random() * 10 + 1);
+        if (!isDead()) {
+
+            if (kakusin <= 4) {
+                System.out.printf("%sの攻撃！会心の一撃！！%Sに%dのダメージを与えた！！\n", getName(), opponent.getName(), damege * 2);
+                opponent.wounded(damege * 2);
+            }else if (damege == 0) {
+                System.out.printf("%sの攻撃！,,,だが、%sは攻撃を回避した！\n", getName(), opponent.getName());
+            }else{
+                System.out.printf("%sの攻撃！%sに%dのダメージを与えた！！\n", getName(), opponent.getName(), damege);
+                opponent.wounded(damege);
+            }
+        }
+    }
+
+
 
     /**
      * 自身へ攻撃されたときのダメージ処理をするメソッド。
@@ -34,5 +54,6 @@ public class Hero extends LivingThing{
             setDead(true);
             System.out.printf("勇者%sは道半ばで力尽きてしまった。\n", getName());
         }
+
     }
 }
